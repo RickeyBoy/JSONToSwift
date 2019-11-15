@@ -20,6 +20,7 @@ A lite Xcode extension that generates Swift Model in an elegant way.
 - [ ] 完善 README 以及名称，上线 v1.0（ddl：11.22）
 - [ ] 支持多种映射方式
 - [ ] 支持右键选择
+- [ ] 支持快捷键
 - [ ] 完善 Error 报错信息
 - [ ] 支持统一命名前缀
 - [ ] 支持额外配置（如是否驼峰命名）
