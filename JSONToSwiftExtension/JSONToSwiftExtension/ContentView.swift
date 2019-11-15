@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  RickeyExtension
+//  JSONToSwiftExtension
 //
-//  Created by Rickey on 2019/11/14.
+//  Created by Rickey on 2019/11/15.
 //  Copyright © 2019 Rickey Wang. All rights reserved.
 //
 

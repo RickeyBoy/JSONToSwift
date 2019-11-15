@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:RickeyExtension.xcodeproj">
+      location = "self:JSONToSwiftExtension.xcodeproj">
    </FileRef>
 </Workspace>

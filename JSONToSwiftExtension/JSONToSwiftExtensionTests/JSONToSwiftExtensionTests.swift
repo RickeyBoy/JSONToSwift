@@ -1,15 +1,15 @@
 //
-//  RickeyExtensionTests.swift
-//  RickeyExtensionTests
+//  JSONToSwiftExtensionTests.swift
+//  JSONToSwiftExtensionTests
 //
-//  Created by Rickey on 2019/11/14.
+//  Created by Rickey on 2019/11/15.
 //  Copyright © 2019 Rickey Wang. All rights reserved.
 //
 
 import XCTest
-@testable import RickeyExtension
+@testable import JSONToSwiftExtension
 
-class RickeyExtensionTests: XCTestCase {
+class JSONToSwiftExtensionTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

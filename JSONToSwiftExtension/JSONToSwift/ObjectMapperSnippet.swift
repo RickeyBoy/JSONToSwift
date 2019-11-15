@@ -22,7 +22,7 @@ struct ObjectMapperSnippet {
     }
     
     /// 头部固定代码
-    static let topSnippet = "\nclass <#name#>: Mappable {\n"
+    static let topSnippet = "class <#name#>: Mappable {\n"
     
     /// 中部固定代码
     static let midSnippet = "\n\n    open func mapping(map: Map) {"
