@@ -36,6 +36,10 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             completionHandler(error)
             return
         }
+        let sJSON = JSON(parseJSON: content)
+        let generator = ModelGenerator()
+        let modelFile = generator.generateModelForJSON(sJSON, "testClass", true)
+        print(modelFile)
         
         // Inset snippets
         let headIndex = SourceEditorUtil.insertLineIndex(buffer: invocation.buffer)

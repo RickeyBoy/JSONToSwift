@@ -15,7 +15,7 @@ protocol ModelFile {
     var sourceJSON: JSON { get set }
     
     /// Storage for various components of the model, it is used to store the intermediate data.
-    var component: ModelComponent { get }
+    var component: ModelComponents { get }
 
     /// Generate various required components for the given property.
     ///
@@ -26,14 +26,14 @@ protocol ModelFile {
 /// 最终的模型文件
 struct SwiftModel: ModelFile {
     var fileName: String
-    var component: ModelComponent
+    var component: ModelComponents
     var sourceJSON: JSON
 
     // MARK: - Initialisers.
 
     init() {
         fileName = ""
-        component = ModelComponent()
+        component = ModelComponents()
         sourceJSON = JSON([])
     }
 
