@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 模型中的一个变量
 /// A strucutre to store various attributes related to a single property.
 struct PropertyComponent {
     /// Name of the property.

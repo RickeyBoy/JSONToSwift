@@ -8,14 +8,7 @@
 
 import Foundation
 
-/// Types of property.
-///
-/// - Value: Value type like String, Integer, Float etc.
-/// - ValueArray: Array of Value
-/// - Object: Object type
-/// - ObjectArray: Array of object
-/// - emptyArray: An empty array
-/// - Null: Null value
+/// 解析后的变量类型
 enum PropertyType: String {
     case valueType
     case valueTypeArray
