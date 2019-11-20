@@ -9,25 +9,17 @@
 /// 模型中的变量信息
 /// A strcture to store the various components of a model file.
 internal struct ModelComponents {
-    /// Declaration of properties.
-    var declarations: [String]
-    /// String constants to store the keys.
-    var stringConstants: [String]
-    /// Initialisers for the properties.
-    var initialisers: [String]
-    // Initialiser function's assignment and function parameters for classes.
-    var initialiserFunctionComponent: [InitialiserFunctionComponent]
-
-    /// Initialise a blank model component structure.
-    init() {
-        declarations = []
-        stringConstants = []
-        initialisers = []
-        initialiserFunctionComponent = []
-    }
+    var list: [ModelComponent] = []
 }
 
-internal struct InitialiserFunctionComponent {
-    var functionParameter: String
-    var assignmentString: String
+internal struct ModelComponent {
+    /// name
+    var name = ""
+    /// type
+    var type = ""
+    
+    init(name: String, type: String) {
+        self.name = name
+        self.type = type
+    }
 }

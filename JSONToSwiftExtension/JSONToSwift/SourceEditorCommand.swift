@@ -39,7 +39,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         let sJSON = JSON(parseJSON: content)
         let generator = ModelGenerator()
         let modelFile = generator.generateModelForJSON(sJSON, "testClass", true)
-        print(modelFile)
         
         // Inset snippets
         let headIndex = SourceEditorUtil.insertLineIndex(buffer: invocation.buffer)
@@ -48,7 +47,8 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             completionHandler(error)
             return
         }
-        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(keys: Array(json.keys)), at: headIndex)
+//        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(keys: Array(json.keys)), at: headIndex)
+        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(file: modelFile[0]), at: headIndex)
         completionHandler(nil)
     }
     

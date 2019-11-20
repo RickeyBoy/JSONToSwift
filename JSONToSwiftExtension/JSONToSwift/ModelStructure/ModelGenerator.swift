@@ -40,8 +40,8 @@ struct ModelGenerator {
             currentModel.sourceJSON = object
 
             for (key, value) in rootObject {
-                /// basic information, name, type and the constant to store the key.
-                let variableName = defaultClassName//NameGenerator.fixVariableName(key)
+                // TODO: - 驼峰命名
+                let variableName = key//NameGenerator.fixVariableName(key)
                 let variableType = VariableType(with: value)
                 let stringConstantName = ""//NameGenerator.variableKey(className, variableName)
 

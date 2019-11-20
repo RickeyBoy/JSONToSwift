@@ -10,13 +10,23 @@ import Foundation
 
 struct ObjectMapperSnippet {
     
-    /// 根据 key 值获取对应的类的代码段
-    static func getClassSnippet(keys: [String]) -> String {
-        let varis = keys.reduce("", { (result, item) -> String in
-            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item))"
+//    /// 根据 key 值获取对应的类的代码段
+//    static func getClassSnippet(keys: [String]) -> String {
+//        let varis = keys.reduce("", { (result, item) -> String in
+//            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item))"
+//        })
+//        let maps = keys.reduce("", { (result, item) -> String in
+//            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item))"
+//        })
+//        return [topSnippet, varis, midSnippet, maps, bottomSnippet].reduce("", +)
+//    }
+    
+    static func getClassSnippet(file: ModelFile) -> String {
+        let varis = file.component.list.reduce("", { (result, item) -> String in
+            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item.name, type: item.type))"
         })
-        let maps = keys.reduce("", { (result, item) -> String in
-            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item))"
+        let maps = file.component.list.reduce("", { (result, item) -> String in
+            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item.name))"
         })
         return [topSnippet, varis, midSnippet, maps, bottomSnippet].reduce("", +)
     }
@@ -42,8 +52,9 @@ struct ObjectMapperSnippet {
 """
     
     /// 获取变量行代码
-    static func varSnippet(key: String) -> String {
-        return "    var \(key) = \"\""
+    static func varSnippet(key: String, type: String) -> String {
+        // TODO: - 之后加上相关的 init value
+        return "    var \(key): \(type)"
     }
         
     /// 获取 map 行代码
