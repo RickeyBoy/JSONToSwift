@@ -18,7 +18,7 @@ struct ModelGenerator {
      - returns: Model files for the current object and sub objects.
      */
     func generateModelForJSON(_ object: JSON, _ defaultClassName: String, _ isTopLevelObject: Bool) -> [ModelFile] {
-        let className = defaultClassName//NameGenerator.fixClassName(defaultClassName, configuration.prefix, isTopLevelObject)
+        // let className = NameGenerator.fixClassName(defaultClassName, configuration.prefix, isTopLevelObject)
         var modelFiles: [ModelFile] = []
 
         // Incase the object was NOT a dictionary. (this would only happen in case of the top level
@@ -28,15 +28,15 @@ struct ModelGenerator {
             let subClassType = VariableType(with: firstObject)
             // If the type of the first item is an object then make it the base class and generate
             // stuff. However, currently it does not make a base file to handle the array.
-//            if subClassType == .object {
-//                return generateModelForJSON(JSONHelper.reduce(rootObject), defaultClassName, isTopLevelObject)
-//            }
+            if subClassType == .object {
+                return generateModelForJSON(reduce(rootObject), defaultClassName, isTopLevelObject)
+            }
             return []
         }
 
         if let rootObject = object.dictionary {
-            // A model file to store the current model.
             var currentModel = SwiftModel()
+            currentModel.fileName = defaultClassName
             currentModel.sourceJSON = object
 
             for (key, value) in rootObject {
@@ -52,21 +52,20 @@ struct ModelGenerator {
                     } else {
                         let subClassType = VariableType(with: value.arrayValue.first!)
                         if subClassType == .object {
-                            // TODO: - 暂不支持 object array
-//                            let models = generateModelForJSON(JSONHelper.reduce(value.arrayValue), variableName, false)
-//                            modelFiles += models
-//                            let model = models.first
-//                            let classname = model?.fileName
-//                            currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, classname!, stringConstantName, key, .objectTypeArray))
+                            let models = generateModelForJSON(reduce(value.arrayValue), variableName, false)
+                            modelFiles += models
+                            let model = models.first
+                            let classname = model?.fileName
+                            currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, classname!, stringConstantName, key, .objectTypeArray))
                         } else {
                             currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, subClassType.rawValue, stringConstantName, key, .valueTypeArray))
                         }
                     }
                 case .object:
-                    let models = generateModelForJSON(value, variableName, false)
-                    let model = models.first
-                    let typeName = model?.fileName
-                    currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, typeName!, stringConstantName, key, .objectType))
+                    // TODO: - 优化命名方式
+                    let className = "\(defaultClassName)_\(key)"
+                    let models = generateModelForJSON(value, className, false)
+                    currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, className, stringConstantName, key, .objectType))
                     modelFiles += models
                 case .null:
                     currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, VariableType.null.rawValue, stringConstantName, key, .nullType))
@@ -80,5 +79,25 @@ struct ModelGenerator {
 
         // at the end we return the collection of files.
         return modelFiles
+    }
+    
+    /// Reduce an array of JSON objects to a single JSON object with all possible keys (merge all keys into one single object).
+    ///
+    /// - Parameter items: An array of JSON items that have to be reduced.
+    /// - Returns: Reduced JSON with the common key/value pairs.
+    func reduce(_ items: [JSON]) -> JSON {
+        return items.reduce([:]) { (source, item) -> JSON in
+            var finalObject = source
+            for (key, jsonValue) in item {
+                if let newValue = jsonValue.dictionary {
+                    finalObject[key] = reduce([JSON(newValue), finalObject[key]])
+                } else if let newValue = jsonValue.array, newValue.first != nil && (newValue.first!.dictionary != nil || newValue.first!.array != nil) {
+                    finalObject[key] = JSON([reduce(newValue + finalObject[key].arrayValue)])
+                } else if jsonValue != JSON.null || !finalObject[key].exists() {
+                    finalObject[key] = jsonValue
+                }
+            }
+            return finalObject
+        }
     }
 }

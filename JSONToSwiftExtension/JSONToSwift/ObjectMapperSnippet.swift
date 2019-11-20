@@ -10,29 +10,22 @@ import Foundation
 
 struct ObjectMapperSnippet {
     
-//    /// 根据 key 值获取对应的类的代码段
-//    static func getClassSnippet(keys: [String]) -> String {
-//        let varis = keys.reduce("", { (result, item) -> String in
-//            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item))"
-//        })
-//        let maps = keys.reduce("", { (result, item) -> String in
-//            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item))"
-//        })
-//        return [topSnippet, varis, midSnippet, maps, bottomSnippet].reduce("", +)
-//    }
-    
     static func getClassSnippet(file: ModelFile) -> String {
+        let top = topSnippet(name: file.fileName)
         let varis = file.component.list.reduce("", { (result, item) -> String in
             return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item.name, type: item.type))"
         })
         let maps = file.component.list.reduce("", { (result, item) -> String in
             return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item.name))"
         })
-        return [topSnippet, varis, midSnippet, maps, bottomSnippet].reduce("", +)
+        return [top, varis, midSnippet, maps, bottomSnippet].reduce("", +)
     }
     
     /// 头部固定代码
-    static let topSnippet = "class <#name#>: Mappable {\n"
+    static func topSnippet(name: String) -> String {
+        // TODO: - 之后加上相关的 init value
+        return "class \(name): Mappable {\n"
+    }
     
     /// 中部固定代码
     static let midSnippet = "\n\n    open func mapping(map: Map) {"

@@ -48,7 +48,11 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             return
         }
 //        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(keys: Array(json.keys)), at: headIndex)
-        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(file: modelFile[0]), at: headIndex)
+        let snippets = modelFile.map { ObjectMapperSnippet.getClassSnippet(file: $0) }
+        let output = snippets.reduce("") { (result, item) -> String in
+            return result + "\n" + item
+        }
+        invocation.buffer.lines.insert(output, at: headIndex)
         completionHandler(nil)
     }
     
