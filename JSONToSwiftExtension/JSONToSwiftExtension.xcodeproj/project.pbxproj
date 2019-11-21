@@ -208,8 +208,8 @@
 				6D2B0EE6237E99E600EDDCB5 /* SourceEditorCommand.swift */,
 				6D2B0EF5237E9B6800EDDCB5 /* SourceEditorUtil.swift */,
 				6D2B0F0E23828EF200EDDCB5 /* ModelStructure */,
-				6D2B0EF7237E9B7200EDDCB5 /* ObjectMapperSnippet.swift */,
-				6D2B0F0823824B3200EDDCB5 /* SwiftyJSON.swift */,
+				6D2B0F1F2386B27B00EDDCB5 /* JSONParser */,
+				6D2B0F202386B49300EDDCB5 /* Snippet */,
 				6D2B0EE8237E99E600EDDCB5 /* Info.plist */,
 				6D2B0EE9237E99E600EDDCB5 /* JSONToSwift.entitlements */,
 			);
@@ -226,6 +226,22 @@
 				6D2B0EF9237EB9A400EDDCB5 /* PropertyType.swift */,
 			);
 			path = ModelStructure;
+			sourceTree = "<group>";
+		};
+		6D2B0F1F2386B27B00EDDCB5 /* JSONParser */ = {
+			isa = PBXGroup;
+			children = (
+				6D2B0F0823824B3200EDDCB5 /* SwiftyJSON.swift */,
+			);
+			path = JSONParser;
+			sourceTree = "<group>";
+		};
+		6D2B0F202386B49300EDDCB5 /* Snippet */ = {
+			isa = PBXGroup;
+			children = (
+				6D2B0EF7237E9B7200EDDCB5 /* ObjectMapperSnippet.swift */,
+			);
+			path = Snippet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
