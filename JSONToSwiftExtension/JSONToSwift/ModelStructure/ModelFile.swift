@@ -25,18 +25,11 @@ protocol ModelFile {
 
 /// 最终的模型文件
 struct SwiftModel: ModelFile {
-    var fileName: String
-    var component: ModelComponents
-    var sourceJSON: JSON
-
-    // MARK: - Initialisers.
-
-    init() {
-        fileName = ""
-        component = ModelComponents()
-        sourceJSON = JSON([])
-    }
-
+    
+    var fileName = ""
+    var component = ModelComponents()
+    var sourceJSON = JSON([])
+    
     mutating func generateAndAddComponentsFor(_ property: PropertyComponent) {
         let isOptional = false
         let isArray = property.propertyType == .valueTypeArray || property.propertyType == .objectTypeArray

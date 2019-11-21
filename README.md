@@ -13,10 +13,11 @@ A lite Xcode extension that generates Swift Model in an elegant way.
 
 ### TODO
 
-- [ ] 配置支持的类型，并自动映射
-- [ ] 支持多层 JSON
+- [x] 配置支持的类型，并自动映射
+- [x] 支持多层 JSON
 - [ ] 支持自动驼峰命名
 - [ ] 自动删除 JSON
+- [ ] 优化代码一波
 - [ ] 完善 README 以及名称，上线 v1.0（ddl：11.22）
 - [ ] 支持提前配置名称
 - [ ] 支持多种映射方式

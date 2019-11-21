@@ -26,19 +26,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
         
         // Json Serialization
-        var json: [String: Any] = [:]
-        do {
-            let jsonData = try JSONSerialization.jsonObject(with: content.data(using: .utf8)!, options : .allowFragments)
-            if let jsonData = jsonData as? [String: Any] {
-                json = jsonData
-            }
-        } catch let error as NSError {
-            completionHandler(error)
-            return
-        }
         let sJSON = JSON(parseJSON: content)
         let generator = ModelGenerator()
-        let modelFile = generator.generateModelForJSON(sJSON, "testClass", true)
+        let modelFile = generator.generateModelForJSON(sJSON, "SampleName", true)
         
         // Inset snippets
         let headIndex = SourceEditorUtil.insertLineIndex(buffer: invocation.buffer)
@@ -47,7 +37,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             completionHandler(error)
             return
         }
-//        invocation.buffer.lines.insert(ObjectMapperSnippet.getClassSnippet(keys: Array(json.keys)), at: headIndex)
         let snippets = modelFile.map { ObjectMapperSnippet.getClassSnippet(file: $0) }
         let output = snippets.reduce("") { (result, item) -> String in
             return result + "\n" + item
