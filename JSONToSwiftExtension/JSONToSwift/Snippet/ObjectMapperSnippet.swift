@@ -16,7 +16,7 @@ struct ObjectMapperSnippet {
             return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item.name, type: item.type))"
         })
         let maps = file.component.list.reduce("", { (result, item) -> String in
-            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item.name))"
+            return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item.name, map: item.map))"
         })
         return [top, varis, midSnippet, maps, bottomSnippet].reduce("", +)
     }
@@ -51,7 +51,7 @@ struct ObjectMapperSnippet {
     }
         
     /// 获取 map 行代码
-    static func mapSnippet(key: String) -> String {
-        return "        \(key) <- map[\"\(key)\"]"
+    static func mapSnippet(key: String, map: String) -> String {
+        return "        \(key) <- map[\"\(map)\"]"
     }
 }

@@ -18,7 +18,7 @@ struct ModelGenerator {
      - returns: Model files for the current object and sub objects.
      */
     func generateModelForJSON(_ object: JSON, _ defaultClassName: String, _ isTopLevelObject: Bool) -> [ModelFile] {
-        // let className = NameGenerator.fixClassName(defaultClassName, configuration.prefix, isTopLevelObject)
+        let className = CamelNameGenerator.camelName(raw: defaultClassName)
         var modelFiles: [ModelFile] = []
 
         // Incase the object was NOT a dictionary. (this would only happen in case of the top level
@@ -29,19 +29,18 @@ struct ModelGenerator {
             // If the type of the first item is an object then make it the base class and generate
             // stuff. However, currently it does not make a base file to handle the array.
             if subClassType == .object {
-                return generateModelForJSON(reduce(rootObject), defaultClassName, isTopLevelObject)
+                return generateModelForJSON(reduce(rootObject), className, isTopLevelObject)
             }
             return []
         }
 
         if let rootObject = object.dictionary {
             var currentModel = SwiftModel()
-            currentModel.fileName = defaultClassName
+            currentModel.fileName = className
             currentModel.sourceJSON = object
 
             for (key, value) in rootObject {
-                // TODO: - 驼峰命名
-                let variableName = key//NameGenerator.fixVariableName(key)
+                let variableName = key
                 let variableType = VariableType(with: value)
                 let stringConstantName = ""//NameGenerator.variableKey(className, variableName)
 
@@ -62,8 +61,8 @@ struct ModelGenerator {
                         }
                     }
                 case .object:
-                    // TODO: - 优化命名方式
-                    let className = "\(defaultClassName)_\(key)"
+                    // TODO: - 优化名字拼接方式方式
+                    let className = "\(className)_\(key)"
                     let models = generateModelForJSON(value, className, false)
                     currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, className, stringConstantName, key, .objectType))
                     modelFiles += models

@@ -17,9 +17,12 @@ internal struct ModelComponent {
     var name = ""
     /// type
     var type = ""
+    /// raw name to map
+    var map = ""
     
-    init(name: String, type: String) {
+    init(name: String, type: String, map: String) {
         self.name = name
         self.type = type
+        self.map = map
     }
 }

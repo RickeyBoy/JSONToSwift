@@ -26,6 +26,7 @@
 		6D2B0F0B238274CD00EDDCB5 /* ModelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F0A238274CD00EDDCB5 /* ModelGenerator.swift */; };
 		6D2B0F0D2382785600EDDCB5 /* ModelFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F0C2382785600EDDCB5 /* ModelFile.swift */; };
 		6D2B0F102382906400EDDCB5 /* ModelComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F0F2382906400EDDCB5 /* ModelComponents.swift */; };
+		6D2B0F252387AA9100EDDCB5 /* CamelNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F242387AA9100EDDCB5 /* CamelNameGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		6D2B0F0A238274CD00EDDCB5 /* ModelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelGenerator.swift; sourceTree = "<group>"; };
 		6D2B0F0C2382785600EDDCB5 /* ModelFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFile.swift; sourceTree = "<group>"; };
 		6D2B0F0F2382906400EDDCB5 /* ModelComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponents.swift; sourceTree = "<group>"; };
+		6D2B0F242387AA9100EDDCB5 /* CamelNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamelNameGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				6D2B0F0F2382906400EDDCB5 /* ModelComponents.swift */,
 				6D2B0EFB237EBAEB00EDDCB5 /* JSONComponent.swift */,
 				6D2B0EF9237EB9A400EDDCB5 /* PropertyType.swift */,
+				6D2B0F242387AA9100EDDCB5 /* CamelNameGenerator.swift */,
 			);
 			path = ModelStructure;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				6D2B0EF6237E9B6800EDDCB5 /* SourceEditorUtil.swift in Sources */,
 				6D2B0EE5237E99E600EDDCB5 /* SourceEditorExtension.swift in Sources */,
 				6D2B0EE7237E99E600EDDCB5 /* SourceEditorCommand.swift in Sources */,
+				6D2B0F252387AA9100EDDCB5 /* CamelNameGenerator.swift in Sources */,
 				6D2B0EFC237EBAEB00EDDCB5 /* JSONComponent.swift in Sources */,
 				6D2B0EF8237E9B7200EDDCB5 /* ObjectMapperSnippet.swift in Sources */,
 				6D2B0F0923824B3200EDDCB5 /* SwiftyJSON.swift in Sources */,
