@@ -6,21 +6,12 @@
 //  Copyright © 2019 Rickey Wang. All rights reserved.
 //
 
-/// A protocol defining the structure of the model file.
+/// 最终的模型文件 - 协议
 protocol ModelFile {
-    /// Filename for the model.
     var fileName: String { get set }
-
-    /// Original JSON source file used for generating this model.
     var sourceJSON: JSON { get set }
-    
-    /// Storage for various components of the model, it is used to store the intermediate data.
     var component: ModelComponents { get }
-
-    /// Generate various required components for the given property.
-    ///
-    /// - Parameter property: Property for which components are to be generated.
-    mutating func generateAndAddComponentsFor(_ property: PropertyComponent)
+    mutating func generateComponents(with property: PropertyComponent)
 }
 
 /// 最终的模型文件
@@ -30,7 +21,7 @@ struct SwiftModel: ModelFile {
     var component = ModelComponents()
     var sourceJSON = JSON([])
     
-    mutating func generateAndAddComponentsFor(_ property: PropertyComponent) {
+    mutating func generateComponents(with property: PropertyComponent) {
         // TODO: - 之后增加 optional 配置
         let isArray = property.propertyType == .valueTypeArray || property.propertyType == .objectTypeArray
         let isObject = property.propertyType == .objectType || property.propertyType == .objectTypeArray

@@ -7,7 +7,6 @@
 //
 
 /// 模型中的变量信息
-/// A strcture to store the various components of a model file.
 internal struct ModelComponents {
     var list: [ModelComponent] = []
 }

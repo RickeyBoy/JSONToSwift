@@ -30,8 +30,6 @@ enum VariableType: String {
     case null = "Any"
     
     /// Extensive value types with differentiation between the number types.
-    ///
-    /// - Returns: Value type of the JSON value
     init(with JSON: JSON) {
         switch JSON.type {
         case .string:

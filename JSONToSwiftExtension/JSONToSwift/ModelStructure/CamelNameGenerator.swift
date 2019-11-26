@@ -9,6 +9,7 @@
 import Foundation
 
 struct CamelNameGenerator {
+    /// 驼峰命名
     static func camelName(raw: String) -> String {
         let rawSubs = raw.components(separatedBy: CharacterSet(charactersIn: "-_ "))
         var camelSubs: [String] = []

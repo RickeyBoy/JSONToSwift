@@ -8,15 +8,8 @@
 
 /// 模型生成
 struct ModelGenerator {
-    /**
-     Generate a set model files for the given JSON object.
-
-     - parameter object:           Object that has to be parsed.
-     - parameter defaultClassName: Default Classname for the object.
-     - parameter isTopLevelObject: Is the current object the root object in the JSON.
-
-     - returns: Model files for the current object and sub objects.
-     */
+    
+    /// 根据 JSON 生成对应的最终 swift 模型
     func generateModelForJSON(_ object: JSON, _ defaultClassName: String, _ isTopLevelObject: Bool) -> [ModelFile] {
         let className = CamelNameGenerator.camelName(raw: defaultClassName)
         var modelFiles: [ModelFile] = []
@@ -42,12 +35,11 @@ struct ModelGenerator {
             for (key, value) in rootObject {
                 let variableName = key
                 let variableType = VariableType(with: value)
-                let stringConstantName = ""//NameGenerator.variableKey(className, variableName)
 
                 switch variableType {
                 case .array:
                     if value.arrayValue.isEmpty {
-                        currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, VariableType.array.rawValue, stringConstantName, key, .emptyArray))
+                        currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.array.rawValue, key, .emptyArray))
                     } else {
                         let subClassType = VariableType(with: value.arrayValue.first!)
                         if subClassType == .object {
@@ -55,21 +47,21 @@ struct ModelGenerator {
                             modelFiles += models
                             let model = models.first
                             let classname = model?.fileName
-                            currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, classname!, stringConstantName, key, .objectTypeArray))
+                            currentModel.generateComponents(with: PropertyComponent(variableName, classname!, key, .objectTypeArray))
                         } else {
-                            currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, subClassType.rawValue, stringConstantName, key, .valueTypeArray))
+                            currentModel.generateComponents(with: PropertyComponent(variableName, subClassType.rawValue, key, .valueTypeArray))
                         }
                     }
                 case .object:
                     // TODO: - 优化名字拼接方式方式
                     let className = "\(className)_\(key)"
                     let models = generateModelForJSON(value, className, false)
-                    currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, className, stringConstantName, key, .objectType))
+                    currentModel.generateComponents(with: PropertyComponent(variableName, className, key, .objectType))
                     modelFiles += models
                 case .null:
-                    currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, VariableType.null.rawValue, stringConstantName, key, .nullType))
+                    currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.null.rawValue, key, .nullType))
                 default:
-                    currentModel.generateAndAddComponentsFor(PropertyComponent(variableName, variableType.rawValue, stringConstantName, key, .valueType))
+                    currentModel.generateComponents(with: PropertyComponent(variableName, variableType.rawValue, key, .valueType))
                 }
             }
 
@@ -81,9 +73,6 @@ struct ModelGenerator {
     }
     
     /// Reduce an array of JSON objects to a single JSON object with all possible keys (merge all keys into one single object).
-    ///
-    /// - Parameter items: An array of JSON items that have to be reduced.
-    /// - Returns: Reduced JSON with the common key/value pairs.
     func reduce(_ items: [JSON]) -> JSON {
         return items.reduce([:]) { (source, item) -> JSON in
             var finalObject = source
