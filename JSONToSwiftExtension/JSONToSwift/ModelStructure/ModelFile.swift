@@ -29,7 +29,7 @@ struct SwiftModel: ModelFile {
 
         switch property.propertyType {
         case .valueType, .valueTypeArray, .objectType, .objectTypeArray, .emptyArray:
-            let item = genVariableDeclaration(name: property.name, type: type, isArray: isArray, isObject: isObject)
+            let item = genVariableDeclaration(name: property.name, type: type, defaultValue: property.defaultValue, isArray: isArray, isObject: isObject)
             component.list.append(item)
         case .nullType:
             // Currently we do not deal with null values.
@@ -38,7 +38,7 @@ struct SwiftModel: ModelFile {
     }
 
     /// 获取名称及类型
-    func genVariableDeclaration(name: String, type: String, isArray: Bool, isObject: Bool) -> ModelComponent {
+    func genVariableDeclaration(name: String, type: String, defaultValue: String, isArray: Bool, isObject: Bool) -> ModelComponent {
         var internalType = type
         if isObject {
             internalType = CamelNameGenerator.camelName(raw: type)
@@ -46,7 +46,7 @@ struct SwiftModel: ModelFile {
         if isArray {
             internalType = "[\(type)]"
         }
-        return ModelComponent(name: CamelNameGenerator.camelName(raw: name), type: internalType, map: name)
+        return ModelComponent(name: CamelNameGenerator.camelName(raw: name), type: internalType, defaultValue: defaultValue, map: name)
     }
 }
 

@@ -39,29 +39,35 @@ struct ModelGenerator {
                 switch variableType {
                 case .array:
                     if value.arrayValue.isEmpty {
-                        currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.array.rawValue, key, .emptyArray))
+                        // 空数组
+                        currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.array.rawValue, VariableType.array.defaultValue, key, .emptyArray))
                     } else {
                         let subClassType = VariableType(with: value.arrayValue.first!)
                         if subClassType == .object {
+                            // subclass 数组
                             let models = generateModelForJSON(reduce(value.arrayValue), variableName, false)
                             modelFiles += models
                             let model = models.first
                             let classname = model?.fileName
-                            currentModel.generateComponents(with: PropertyComponent(variableName, classname!, key, .objectTypeArray))
+                            currentModel.generateComponents(with: PropertyComponent(variableName, classname!, VariableType.array.defaultValue, key, .objectTypeArray))
                         } else {
-                            currentModel.generateComponents(with: PropertyComponent(variableName, subClassType.rawValue, key, .valueTypeArray))
+                            // 值数组
+                            currentModel.generateComponents(with: PropertyComponent(variableName, subClassType.rawValue, VariableType.array.defaultValue, key, .valueTypeArray))
                         }
                     }
                 case .object:
                     // TODO: - 优化名字拼接方式方式
                     let className = "\(className)_\(key)"
                     let models = generateModelForJSON(value, className, false)
-                    currentModel.generateComponents(with: PropertyComponent(variableName, className, key, .objectType))
+                    // subclass 映射
+                    currentModel.generateComponents(with: PropertyComponent(variableName, className, VariableType.object.defaultValue, key, .objectType))
                     modelFiles += models
                 case .null:
-                    currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.null.rawValue, key, .nullType))
+                    // 无法识别的情况
+                    currentModel.generateComponents(with: PropertyComponent(variableName, VariableType.null.rawValue, VariableType.null.defaultValue, key, .nullType))
                 default:
-                    currentModel.generateComponents(with: PropertyComponent(variableName, variableType.rawValue, key, .valueType))
+                    // 默认：值映射
+                    currentModel.generateComponents(with: PropertyComponent(variableName, variableType.rawValue, variableType.defaultValue, key, .valueType))
                 }
             }
 

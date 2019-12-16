@@ -73,19 +73,19 @@ enum VariableType: String {
     var defaultValue: String {
         switch self {
         case .string:
-            return " = \"\""
+            return "= \"\""
         case .int:
-            return " = 0"
+            return "= 0"
         case .float:
-            return " = 0.0"
+            return "= 0.0"
         case .double:
-            return " = 0.0"
+            return "= 0.0"
         case .bool:
-            return " = true"
+            return "= true"
         case .array:
-            return " = []"
+            return "= []"
         case .object:
-            return " = OBJ()"
+            return "= OBJ()"
         case .null:
             return ""
         }

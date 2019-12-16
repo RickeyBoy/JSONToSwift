@@ -16,12 +16,15 @@ internal struct ModelComponent {
     var name = ""
     /// type
     var type = ""
+    /// 默认值
+    var defaultValue = ""
     /// raw name to map
     var map = ""
     
-    init(name: String, type: String, map: String) {
+    init(name: String, type: String, defaultValue: String, map: String) {
         self.name = name
         self.type = type
+        self.defaultValue = defaultValue
         self.map = map
     }
 }

@@ -13,7 +13,7 @@ struct ObjectMapperSnippet {
     static func getClassSnippet(file: ModelFile) -> String {
         let top = topSnippet(name: file.fileName)
         let varis = file.component.list.reduce("", { (result, item) -> String in
-            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item.name, type: item.type))"
+            return "\(result)\n\(ObjectMapperSnippet.varSnippet(key: item.name, type: item.type, defaultValue: item.defaultValue))"
         })
         let maps = file.component.list.reduce("", { (result, item) -> String in
             return "\(result)\n\(ObjectMapperSnippet.mapSnippet(key: item.name, map: item.map))"
@@ -45,9 +45,9 @@ struct ObjectMapperSnippet {
 """
     
     /// 获取变量行代码
-    static func varSnippet(key: String, type: String) -> String {
+    static func varSnippet(key: String, type: String, defaultValue: String) -> String {
         // TODO: - 之后加上相关的 init value
-        return "    var \(key): \(type)"
+        return "    var \(key): \(type) \(defaultValue)"
     }
         
     /// 获取 map 行代码

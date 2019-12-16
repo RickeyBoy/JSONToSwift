@@ -12,11 +12,14 @@ import Foundation
 struct PropertyComponent {
     var name: String
     var type: String
+    var defaultValue: String
     var key: String
     var propertyType: PropertyType
-    init(_ name: String, _ type: String, _ key: String, _ propertyType: PropertyType) {
+    
+    init(_ name: String, _ type: String, _ defaultValue: String, _ key: String, _ propertyType: PropertyType) {
         self.name = name
         self.type = type
+        self.defaultValue = defaultValue
         self.key = key
         self.propertyType = propertyType
     }
