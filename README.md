@@ -31,11 +31,11 @@ A lite Xcode extension that generates Swift Model in an elegant way.
 - [x] 支持的自动类型识别及映射
 - [x] 支持多层 JSON
 - [x] 支持自动驼峰命名
+- [x] 支持声明变量的默认值
 
 
 ### TODO
 - [ ] 自动删除 JSON
-- [ ] 支持声明变量的默认值
 - [ ] 支持多种映射方式
 - [ ] 支持右键选择
 - [ ] 支持快捷键
