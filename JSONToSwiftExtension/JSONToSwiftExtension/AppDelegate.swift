@@ -7,26 +7,23 @@
 //
 
 import Cocoa
-import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
 
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
-        // Create the window and set the content view. 
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-            backing: .buffered, defer: false)
+        window = NSWindow(contentRect: .init(origin: .zero,
+                                             size: .init(width: NSScreen.main!.frame.midX, height: NSScreen.main!.frame.midY)),
+                          styleMask: [.closable],
+                          backing: .buffered,
+                          defer: false)
+        window.title = "New Window"
+        window.isOpaque = false
         window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
+        window.isMovableByWindowBackground = true
+        window.backgroundColor = NSColor(calibratedHue: 0, saturation: 1.0, brightness: 0, alpha: 0.7)
         window.makeKeyAndOrderFront(nil)
     }
 
@@ -34,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func createNewWindow() {
+        
+    }
 
 }
-
