@@ -15,18 +15,15 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
 
         // Read selection content
-        var content = SourceEditorUtil.selectedContent(buffer: invocation.buffer)
-        if content.count <= 0 {
-            content = SourceEditorUtil.fileContent(buffer: invocation.buffer)
-        }
-        guard content.count > 0 else {
+        let content = Preprocessor.selectedContent(buffer: invocation.buffer)
+        guard content.jsonStr.count > 0 else {
             let error = NSError(domain: "No Json Data Selected", code: 1, userInfo: nil)
             completionHandler(error)
             return
         }
         
         // Json Serialization
-        let sJSON = JSON(parseJSON: content)
+        let sJSON = JSON(parseJSON: content.jsonStr)
         let generator = ModelGenerator()
         let modelFile = generator.generateModelForJSON(sJSON, "SampleName", true)
         

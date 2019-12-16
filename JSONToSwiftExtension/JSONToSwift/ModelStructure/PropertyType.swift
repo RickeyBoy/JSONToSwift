@@ -68,4 +68,26 @@ enum VariableType: String {
             self = .object
         }
     }
+    
+    /// 类型对应的默认值
+    var defaultValue: String {
+        switch self {
+        case .string:
+            return " = \"\""
+        case .int:
+            return " = 0"
+        case .float:
+            return " = 0.0"
+        case .double:
+            return " = 0.0"
+        case .bool:
+            return " = true"
+        case .array:
+            return " = []"
+        case .object:
+            return " = OBJ()"
+        case .null:
+            return ""
+        }
+    }
 }

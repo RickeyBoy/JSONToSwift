@@ -27,6 +27,7 @@
 		6D2B0F0D2382785600EDDCB5 /* ModelFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F0C2382785600EDDCB5 /* ModelFile.swift */; };
 		6D2B0F102382906400EDDCB5 /* ModelComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F0F2382906400EDDCB5 /* ModelComponents.swift */; };
 		6D2B0F252387AA9100EDDCB5 /* CamelNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B0F242387AA9100EDDCB5 /* CamelNameGenerator.swift */; };
+		6DEACDDE23A21674002CFF2C /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEACDDD23A21674002CFF2C /* Preprocessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		6D2B0F0C2382785600EDDCB5 /* ModelFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFile.swift; sourceTree = "<group>"; };
 		6D2B0F0F2382906400EDDCB5 /* ModelComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponents.swift; sourceTree = "<group>"; };
 		6D2B0F242387AA9100EDDCB5 /* CamelNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamelNameGenerator.swift; sourceTree = "<group>"; };
+		6DEACDDD23A21674002CFF2C /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				6D2B0EE4237E99E600EDDCB5 /* SourceEditorExtension.swift */,
 				6D2B0EE6237E99E600EDDCB5 /* SourceEditorCommand.swift */,
 				6D2B0EF5237E9B6800EDDCB5 /* SourceEditorUtil.swift */,
+				6DEACDDC23A21624002CFF2C /* Preprocess */,
 				6D2B0F0E23828EF200EDDCB5 /* ModelStructure */,
 				6D2B0F1F2386B27B00EDDCB5 /* JSONParser */,
 				6D2B0F202386B49300EDDCB5 /* Snippet */,
@@ -245,6 +248,14 @@
 				6D2B0EF7237E9B7200EDDCB5 /* ObjectMapperSnippet.swift */,
 			);
 			path = Snippet;
+			sourceTree = "<group>";
+		};
+		6DEACDDC23A21624002CFF2C /* Preprocess */ = {
+			isa = PBXGroup;
+			children = (
+				6DEACDDD23A21674002CFF2C /* Preprocessor.swift */,
+			);
+			path = Preprocess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DEACDDE23A21674002CFF2C /* Preprocessor.swift in Sources */,
 				6D2B0EF6237E9B6800EDDCB5 /* SourceEditorUtil.swift in Sources */,
 				6D2B0EE5237E99E600EDDCB5 /* SourceEditorExtension.swift in Sources */,
 				6D2B0EE7237E99E600EDDCB5 /* SourceEditorCommand.swift in Sources */,

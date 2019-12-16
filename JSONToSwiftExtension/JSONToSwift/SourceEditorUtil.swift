@@ -19,32 +19,7 @@ extension String {
 
 struct SourceEditorUtil {
     
-    /// Get combined string of selection content
-    static func selectedContent(buffer: XCSourceTextBuffer) -> String {
-        guard let selections = buffer.selections as? [XCSourceTextRange], let lines = buffer.lines as? [String] else { return "" }
-        guard let start = selections.first?.start, let end = selections.last?.end else { return "" }
-        if start.line == end.line {
-            // single line
-            let lineText = lines[start.line]
-            return lineText[start.column..<end.column-start.column+1]
-        } else {
-            // multiple lines
-            var results = ""
-            for index in 0..<selections.count {
-                let lineText = lines[index]
-                if index == start.line {
-                    results = lineText[start.column..<lineText.count]
-                } else if index == end.line {
-                    results = results + lineText[start.column..<lineText.count]
-                } else {
-                    results = results + lineText
-                }
-            }
-            return results
-        }
-    }
-    
-    /// Get combined string of the file, will filter lines with prefix of //
+    /// 获取整个文件的代码，过滤注释掉的部分
     static func fileContent(buffer: XCSourceTextBuffer) -> String {
         return buffer.lines.reduce("") { (result, item) -> String in
             if let str = item as? String, !str.hasPrefix("//") {

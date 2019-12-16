@@ -41,4 +41,4 @@ A lite Xcode extension that generates Swift Model in an elegant way.
 - [ ] 支持自定义模板
 - [ ] 开源库标准重构代码
 - [ ] 完善 README，上线 v2.0
-- [ ] 介绍文献并推广
+- [ ] 介绍文献
