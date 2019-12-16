@@ -11,13 +11,17 @@ A lite Xcode extension that generates Swift Model in an elegant way.
 
 ### 使用说明
 
-1. 选中需要转换的 JSON 代码
-2. 在 Editor 选项下选择 JSONToSwift 插件
-3. 得到自动映射后的 Swift 代码
+1. 下载最新版 JSONToSwift
+2. 将 app 拖入 Applications 文件夹，运行app，然后确保 "系统偏好设置" -> "扩展" -> "Xcode Source Editor" 插件名字前已打钩
+3. 选中需要转换的 JSON 代码
+4. 在 Editor 选项下选择 JSONToSwift 插件
+5. 得到自动映射后的 Swift 代码
 
 ![](https://github.com/RickeyBoy/JSONToSwift/blob/master/0.png?raw=true)
 
 ![](https://github.com/RickeyBoy/JSONToSwift/blob/master/1.png?raw=true)
+
+![](https://github.com/RickeyBoy/JSONToSwift/blob/master/2.png?raw=true)
 
 
 
