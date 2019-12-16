@@ -40,13 +40,15 @@ struct SwiftModel: ModelFile {
     /// 获取名称及类型
     func genVariableDeclaration(name: String, type: String, defaultValue: String, isArray: Bool, isObject: Bool) -> ModelComponent {
         var internalType = type
+        var internalValue = defaultValue
         if isObject {
             internalType = CamelNameGenerator.camelName(raw: type)
+            internalValue = "= \(internalType)()"
         }
         if isArray {
             internalType = "[\(type)]"
         }
-        return ModelComponent(name: CamelNameGenerator.camelName(raw: name), type: internalType, defaultValue: defaultValue, map: name)
+        return ModelComponent(name: CamelNameGenerator.camelName(raw: name), type: internalType, defaultValue: internalValue, map: name)
     }
 }
 

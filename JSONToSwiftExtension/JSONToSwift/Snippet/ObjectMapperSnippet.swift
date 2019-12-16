@@ -40,7 +40,6 @@ struct ObjectMapperSnippet {
         self.init()
     }
     public init() {}
-
 }
 """
     
